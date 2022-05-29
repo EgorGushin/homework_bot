@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 logging.basicConfig(
     level=logging.DEBUG,
-    filename='program.log', 
+    filename='program.log',
     format='%(asctime)s, %(lineno)s, %(levelname)s, %(funcName)s, %(message)s',
     filemode='w')
 logger = logging.getLogger(__name__)
@@ -49,7 +49,7 @@ def send_message(bot, message):
 
 def get_api_answer(current_timestamp):
     """Делает запрос к единственному эндпоинту API-сервиса."""
-    timestamp = current_timestamp or int(time.time())
+    timestamp = current_timestamp
     params = {'from_date': timestamp}
     try:
         homework_statuses = requests.get(ENDPOINT,
@@ -84,7 +84,8 @@ def check_response(response):
 
 def parse_status(homework):
     """Извлечение из информации о конкретной домашней
-    работе статус этой работы."""
+    работе статус этой работы.
+    """
     if 'homework_name' not in homework:
         raise KeyError('Отсутствует ключ "homework_name" в ответе API')
     if 'status' not in homework:
@@ -111,7 +112,7 @@ def main():
     if not check_tokens():
         logger.critical('Проверь переменные')
         send_message(bot, 'Проверь переменные')
-        raise Exception ('Проверь переменные')
+        raise Exception('Проверь переменные')
     while True:
         try:
             response = get_api_answer(current_timestamp)
