@@ -50,7 +50,7 @@ def send_message(bot, message):
 def get_api_answer(current_timestamp):
     """Делает запрос к единственному эндпоинту API-сервиса."""
     timestamp = current_timestamp
-    params = {'from_date': 1549962000}
+    params = {'from_date': timestamp}
     try:
         homework_statuses = requests.get(ENDPOINT,
                                          headers=HEADERS,
@@ -83,8 +83,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Извлечение из информации о конкретной домашней работе статус этой работы.
-    """
+    """Извлечение информации о статус конкретной работы."""
     if 'homework_name' not in homework:
         raise KeyError('Отсутствует ключ "homework_name" в ответе API')
     if 'status' not in homework:
