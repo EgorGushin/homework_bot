@@ -50,7 +50,7 @@ def send_message(bot, message):
 def get_api_answer(current_timestamp):
     """Делает запрос к единственному эндпоинту API-сервиса."""
     timestamp = current_timestamp
-    params = {'from_date': timestamp}
+    params = {'from_date': 1549962000}
     try:
         homework_statuses = requests.get(ENDPOINT,
                                          headers=HEADERS,
@@ -83,8 +83,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Извлечение из информации о конкретной домашней
-    работе статус этой работы.
+    """Извлечение из информации о конкретной домашней работе статус этой работы.
     """
     if 'homework_name' not in homework:
         raise KeyError('Отсутствует ключ "homework_name" в ответе API')
@@ -97,8 +96,9 @@ def parse_status(homework):
 
 
 def check_tokens():
-    """Проверяет доступность переменных окружения,
-    которые необходимы для работы программы."""
+    """Проверяет доступность переменных окружения.
+    Которые необходимы для работы программы.
+    """
     if all([PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID]):
         return True
 
