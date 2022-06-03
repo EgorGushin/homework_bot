@@ -112,6 +112,7 @@ def check_response(response):
         raise TypeError('Ответ API отличен от словаря')
     try:
         works = response['homeworks']
+        logger.info(f'Получен ответ {works}')
     except KeyError:
         raise KeyError('Ошибка словаря по ключу homeworks')
     if works != []:
