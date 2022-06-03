@@ -17,7 +17,8 @@ handler = RotatingFileHandler('bot.log',
                               maxBytes=50000000,
                               backupCount=5
                               )
-logger.addHandler(handler, stdout_handler)
+handlers = [handler, handler]
+logger.addHandler(handlers)
 formatter = logging.Formatter(
     '%(asctime)s, %(lineno)s, %(levelname)s, %(funcName)s, %(message)s'
 )
