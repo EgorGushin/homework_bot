@@ -51,12 +51,14 @@ def main():
         bot = telegram.Bot(token=TELEGRAM_TOKEN)
         try:
             response = get_api_answer(current_timestamp)
-            current_timestamp = response.get('current_date') or int(time.time())
+            current_timestamp = response.get(
+                'current_date'
+                ) or int(time.time())
             if check_response(response) != []:
                 message = parse_status(check_response(response))
                 current_report[
                     check_response(response)['homework_name']
-                    ] = check_response(response)['status']
+                ] = check_response(response)['status']
                 if current_report != prev_report:
                     send_message(bot, message)
                 else:
@@ -119,15 +121,14 @@ def check_response(response):
         return homework
     else:
         return works
-        
 
 
 def parse_status(homework):
     """Извлечение информации о статус конкретной работы."""
     if 'homework_name' not in homework:
-        raise KeyError(f'Отсутствует ключ "homework_name" ({homework_name}) в ответе API')
+        raise KeyError(f'Отсутствует ключ "homework_name" в ответе API')
     if 'status' not in homework:
-        raise Exception(f'Отсутствует ключ "status" ({status}) в ответе API')
+        raise Exception(f'Отсутствует ключ "status" в ответе API')
     homework_name = homework['homework_name']
     homework_status = homework['status']
     if homework_status not in HOMEWORK_STATUSES:
