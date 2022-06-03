@@ -117,6 +117,8 @@ def check_response(response):
         raise KeyError('Ошибка словаря по ключу homeworks')
     if works != []:
         homework = works[0]
+        if 'current_date' not in homework:
+            raise KeyError('Отсутствует ключ "curent_date" в ответе API')
         return homework
     else:
         return works
