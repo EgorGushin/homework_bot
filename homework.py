@@ -53,7 +53,7 @@ def main():
             response = get_api_answer(current_timestamp)
             current_timestamp = response.get(
                 'current_date'
-                ) or int(time.time())
+            ) or int(time.time())
             if check_response(response) != []:
                 message = parse_status(check_response(response))
                 current_report[
@@ -126,9 +126,9 @@ def check_response(response):
 def parse_status(homework):
     """Извлечение информации о статус конкретной работы."""
     if 'homework_name' not in homework:
-        raise KeyError(f'Отсутствует ключ "homework_name" в ответе API')
+        raise KeyError('Отсутствует ключ "homework_name" в ответе API')
     if 'status' not in homework:
-        raise Exception(f'Отсутствует ключ "status" в ответе API')
+        raise Exception('Отсутствует ключ "status" в ответе API')
     homework_name = homework['homework_name']
     homework_status = homework['status']
     if homework_status not in HOMEWORK_STATUSES:
