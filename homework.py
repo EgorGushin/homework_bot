@@ -72,11 +72,6 @@ def main():
                 send_message(bot, message_e)
                 ERROR_MESSAGE = message_e
             time.sleep(RETRY_TIME)
-        finally:
-            send_message(
-                bot,
-                'Работа бота приостановлена'
-            )
 
 
 def send_message(bot, message):
