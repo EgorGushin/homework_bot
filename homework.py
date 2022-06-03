@@ -42,7 +42,7 @@ HOMEWORK_STATUSES = {
 
 def main():
     """Основная логика работы бота."""
-    logger.info('Бот запущен')
+    logger.info('Бот запущен. Работаем!')
     current_timestamp = int(time.time())
     ERROR_MESSAGE = ''
     current_report = {}
