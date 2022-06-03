@@ -12,11 +12,12 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+stdout_handler = logging.StreamHandler(sys.stdout)
 handler = RotatingFileHandler('bot.log',
                               maxBytes=50000000,
                               backupCount=5
                               )
-logger.addHandler(handler)
+logger.addHandler(handler, stdout_handler)
 formatter = logging.Formatter(
     '%(asctime)s, %(lineno)s, %(levelname)s, %(funcName)s, %(message)s'
 )
@@ -40,6 +41,7 @@ HOMEWORK_STATUSES = {
 
 def main():
     """Основная логика работы бота."""
+    logger.info('Бот запущен')
     current_timestamp = int(time.time())
     ERROR_MESSAGE = ''
     current_report = {}
