@@ -77,8 +77,8 @@ def main():
             if message_e != error_message:
                 send_message(bot, message_e)
                 error_message = message_e
-        finally:
-            time.sleep(RETRY_TIME)
+            else:
+                time.sleep(RETRY_TIME)
 
 
 def send_message(bot, message):
