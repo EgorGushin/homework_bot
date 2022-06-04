@@ -59,9 +59,7 @@ def main():
                 'current_date'
             ) or int(time.time())
             after_check_response = check_response(response)
-            if after_check_response = []:
-                time.sleep(RETRY_TIME)
-            else:
+            if after_check_response != []:
                 message = parse_status(after_check_response)
                 current_report[
                     after_check_response['homework_name']
@@ -69,7 +67,9 @@ def main():
                 if current_report != prev_report:
                     send_message(bot, message)
                 else:
-                    prev_report = current_report.copy()        
+                    prev_report = current_report.copy()
+            else:
+                time.sleep(RETRY_TIME)     
         except Exception as error:
             logger.error(error)
             message_e = f'Сбой в работе программы: {error}'
@@ -95,8 +95,8 @@ def get_api_answer(current_timestamp):
     try:
         logger.info('Отправлен запрос на сервер Я.П.')
         http_response = requests.get(url=ENDPOINT,
-                                    headers=HEADERS,
-                                    params=params)
+                                     headers=HEADERS,
+                                     params=params)
     except Exception as error:
         raise Exception(f'Ошибко {error} при запросе к API')
     if http_response.status_code != HTTPStatus.OK:
@@ -120,7 +120,6 @@ def check_response(response):
     if isinstance(works, list):
         homework = works[0]
         return homework
-        
 
 
 def parse_status(homework):
