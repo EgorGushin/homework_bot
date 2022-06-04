@@ -56,8 +56,9 @@ def main():
         try:
             response = get_api_answer(current_timestamp)
             current_timestamp = response.get(
-                'current_date'
-            ) or int(time.time())
+                'current_date',
+                current_timestamp
+            )
             after_check_response = check_response(response)
             if after_check_response != []:
                 message = parse_status(after_check_response)
