@@ -69,7 +69,7 @@ def main():
                 else:
                     prev_report = current_report.copy()
             else:
-                time.sleep(RETRY_TIME)     
+                time.sleep(RETRY_TIME)
         except Exception as error:
             logger.error(error)
             message_e = f'Сбой в работе программы: {error}'
