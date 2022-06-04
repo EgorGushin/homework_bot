@@ -50,9 +50,9 @@ def main():
     if not check_tokens():
         logger.critical('Проверь переменные')
         raise sys.exit('Проверь переменные')
+    logger.info('Бот запущен. Работаем!')
     while True:
         bot = start_bot
-        logger.info('Бот запущен. Работаем!')
         try:
             response = get_api_answer(current_timestamp)
             current_timestamp = response.get(
