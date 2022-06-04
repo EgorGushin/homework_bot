@@ -69,16 +69,14 @@ def main():
                     send_message(bot, message)
                 else:
                     prev_report = current_report.copy()
-            else:
-                time.sleep(RETRY_TIME)
         except Exception as error:
             logger.error(error)
             message_e = f'Сбой в работе программы: {error}'
             if message_e != error_message:
                 send_message(bot, message_e)
                 error_message = message_e
-            else:
-                time.sleep(RETRY_TIME)
+        finally:
+            time.sleep(RETRY_TIME)
 
 
 def send_message(bot, message):
