@@ -117,9 +117,11 @@ def check_response(response):
         logger.info(f'Получен ответ {works}')
     except KeyError:
         raise KeyError('Ошибка словаря по ключу homeworks')
-    if isinstance(works, list):
+    if works != []:
         homework = works[0]
         return homework
+    else:
+        return works
 
 
 def parse_status(homework):
