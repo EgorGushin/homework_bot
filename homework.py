@@ -115,10 +115,10 @@ def check_response(response):
         logger.info(f'Получен ответ {works}')
     except KeyError:
         raise KeyError('Ошибка словаря по ключу homeworks')
-    if isinstance(type(works), list):
-        while True:
-            homework = works[0]
-            return homework
+    if isinstance(works, list) is False:
+        homework = works[0]
+        return homework
+        
     else:
         return works
 
