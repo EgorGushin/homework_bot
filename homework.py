@@ -46,28 +46,26 @@ def main():
     error_message = ''
     current_report = dict()
     prev_report = dict()
-    start_bot = telegram.Bot(token=TELEGRAM_TOKEN)
     if not check_tokens():
         logger.critical('Проверь переменные')
         raise sys.exit('Проверь переменные')
     logger.info('Бот запущен. Работаем!')
+    bot = telegram.Bot(token=TELEGRAM_TOKEN)
     while True:
-        bot = start_bot
         try:
             response = get_api_answer(current_timestamp)
             current_timestamp = response.get(
                 'current_date',
                 current_timestamp
             )
-            after_check_response = check_response(response)
-            if after_check_response != []:
-                message = parse_status(after_check_response)
+            all_homeworks = check_response(response)
+            if all_homeworks != []:
+                message = parse_status(all_homeworks)
                 current_report[
-                    after_check_response['homework_name']
-                ] = after_check_response['status']
+                    all_homeworks['homework_name']
+                ] = all_homeworks['status']
                 if current_report != prev_report:
                     send_message(bot, message)
-                else:
                     prev_report = current_report.copy()
         except Exception as error:
             logger.error(error)
@@ -117,9 +115,10 @@ def check_response(response):
         logger.info(f'Получен ответ {works}')
     except KeyError:
         raise KeyError('Ошибка словаря по ключу homeworks')
-    if works != []:
-        homework = works[0]
-        return homework
+    if isinstance(type(works), list):
+        while True:
+            homework = works[0]
+            return homework
     else:
         return works
 
