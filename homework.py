@@ -118,7 +118,6 @@ def check_response(response):
     if isinstance(works, list) is False:
         homework = works[0]
         return homework
-        
     else:
         return works
 
