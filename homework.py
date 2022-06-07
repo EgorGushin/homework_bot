@@ -125,7 +125,7 @@ def check_response(response):
 def parse_status(homework):
     """Извлечение информации о статус конкретной работы."""
     if 'homework_name' not in homework:
-        raise Exception('Отсутствует ключ "homework_name" в ответе API.')
+        raise KeyError('Отсутствует ключ "homework_name" в ответе API.')
     if 'status' not in homework:
         raise Exception('Отсутствует ключ "status" в ответе API.')
     homework_name = homework['homework_name']
