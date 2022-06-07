@@ -42,13 +42,13 @@ HOMEWORK_STATUSES = {
 
 def main():
     """Основная логика работы бота."""
+    if not check_tokens():
+        logger.critical('Проверь переменные')
+        raise sys.exit('Проверь переменные')
     current_timestamp = int(time.time())
     error_message = ''
     current_report = dict()
     prev_report = dict()
-    if not check_tokens():
-        logger.critical('Проверь переменные')
-        raise sys.exit('Проверь переменные')
     logger.info('Бот запущен. Работаем!')
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     while True:
@@ -59,7 +59,7 @@ def main():
                 current_timestamp
             )
             all_homeworks = check_response(response)
-            if all_homeworks != []:
+            if not isinstance(all_homeworks, list) is True:
                 message = parse_status(all_homeworks)
                 current_report[
                     all_homeworks['homework_name']
@@ -115,7 +115,7 @@ def check_response(response):
         logger.info(f'Получен ответ {works}')
     except KeyError:
         raise KeyError('Ошибка словаря по ключу homeworks')
-    if isinstance(works, list) is False:
+    if not isinstance(works, list) is True:
         homework = works[0]
         return homework
     else:
