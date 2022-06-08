@@ -59,7 +59,7 @@ def main():
                 current_timestamp
             )
             all_homeworks = check_response(response)
-            if not isinstance(all_homeworks, list) is True:
+            if all_homeworks != []:
                 message = parse_status(all_homeworks)
                 current_report[
                     all_homeworks['homework_name']
