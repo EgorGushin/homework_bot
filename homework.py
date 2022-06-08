@@ -117,9 +117,7 @@ def check_response(response):
         raise KeyError('Ошибка словаря по ключу homeworks')
     if not isinstance(works, list):
         raise TypeError('Список работ не список')
-    return works  
-    # else:
-    #     
+    return works
 
 
 def parse_status(homework):
