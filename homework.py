@@ -60,10 +60,10 @@ def main():
             )
             all_homeworks = check_response(response)
             if all_homeworks:
-                message = parse_status(all_homeworks)[0]
+                message = parse_status(all_homeworks[0])
                 current_report[
-                    all_homeworks['homework_name']
-                ] = all_homeworks['status']
+                    all_homeworks[0]['homework_name']
+                ] = all_homeworks[0]['status']
                 if current_report != prev_report:
                     send_message(bot, message)
                     prev_report = current_report.copy()
