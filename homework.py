@@ -59,8 +59,8 @@ def main():
                 current_timestamp
             )
             all_homeworks = check_response(response)
-            if all_homeworks != []:
-                message = parse_status(all_homeworks)
+            if all_homeworks:
+                message = parse_status(all_homeworks)[0]
                 current_report[
                     all_homeworks['homework_name']
                 ] = all_homeworks['status']
